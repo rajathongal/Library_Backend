@@ -1,0 +1,46 @@
+{
+  "name": "library_backend",
+  "version": "1.0.0",
+  "description": "Library app backend ",
+  "main": "start.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node start.js",
+    "server": "nodemon start.js --unhandled-rejections=strict",
+    "start:test": "cross-env NODE_ENV=test nodemon start.js",
+    "start:prod": "cross-env NODE_ENV=production node start.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rajathongal/Library_Backend.git"
+  },
+  "keywords": [
+    "nodejs",
+    "mongodb",
+    "express",
+    "react",
+    "library",
+    "backend",
+    "REST"
+  ],
+  "author": "rajathongal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rajathongal/Library_Backend/issues"
+  },
+  "homepage": "https://github.com/rajathongal/Library_Backend#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "config": "^3.3.6",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "moment": "^2.29.1",
+    "mongoose": "^5.12.15",
+    "multer": "^1.4.2",
+    "nodemon": "^2.0.7",
+    "path": "^0.12.7"
+  }
+}
