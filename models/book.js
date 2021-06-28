@@ -30,6 +30,6 @@ const bookSchema = new Schema({
 },
 { timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' },  versionKey: false });
 
-bookSchema.index({email: 1}, { unique: true });
+bookSchema.index({title: 1}, { unique: true });
 
 module.exports = mongoose.model('Books', bookSchema);

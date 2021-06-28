@@ -10,7 +10,9 @@ exports.addBook = async (req, res, next) => {
         } = req.body;
 
         return await Books.findOne({title: title}).then(async resp => {
+            console.log(resp)
             if (resp === null) {
+                console.log("entered")
                 const book = Books({
                     title: title,
                     author: author,
@@ -20,8 +22,9 @@ exports.addBook = async (req, res, next) => {
                         contentType: req.file.mimetype 
                     }
                 });
-
+                
                 return await book.save().then(response => {
+                    console.log(response)
                     return res.status(200).json({ 
                         success: true,
                         message: "Book added successfully",
