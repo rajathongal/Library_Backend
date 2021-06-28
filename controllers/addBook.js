@@ -1,4 +1,5 @@
 const Books = require('../models/book');
+const Authors = require('../models/authors');
 
 exports.addBook = async (req, res, next) => {
     
@@ -10,7 +11,6 @@ exports.addBook = async (req, res, next) => {
         } = req.body;
 
         return await Books.findOne({title: title}).then(async resp => {
-            console.log(resp)
             if (resp === null) {
                 console.log("entered")
                 const book = Books({
@@ -22,8 +22,22 @@ exports.addBook = async (req, res, next) => {
                         contentType: req.file.mimetype 
                     }
                 });
+
+                const authorAdd = Authors({
+                    author: author,
+                    image: {
+                        data: req.file.buffer || null,
+                        contentType: req.file.mimetype 
+                    }
+                })
                 
-                return await book.save().then(response => {
+                return await book.save().then(async response => {
+
+                    await Authors.findOne({author: author}).then(res => {
+                        if(res === null){
+                            authorAdd.save();
+                        }
+                    })
                     
                     return res.status(200).json({ 
                         success: true,
