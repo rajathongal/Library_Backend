@@ -1,14 +1,15 @@
 const Books = require('../models/book');
 
 exports.addBook = async (req, res, next) => {
+    
     try {
         const { 
-            title,
+            title,  
             author,
             genre,
         } = req.body;
 
-        return await Books.findOne({title: title}).then(resp => {
+        return await Books.findOne({title: title}).then(async resp => {
             if (resp === null) {
                 const book = Books({
                     title: title,
