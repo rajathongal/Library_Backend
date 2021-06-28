@@ -72,3 +72,38 @@ exports.bookView = async (req, res) => {
         });
     }
 }
+
+exports.addBookCoverPage = async (req, res) => {
+    try {
+        const { 
+            _id
+        } = req.body;
+
+        return await Books.findOne({_id: _id}).then(async resp => {
+           
+            if (resp === null) {
+                return res.status(404).json({ 
+                    success: true,
+                    message: "Book does not exists"
+                });
+            } else {
+                return await Books.findOneAndUpdate({_id: _id}, { 
+                    bookCover: {
+                        data: req.file.buffer || null,
+                        contentType: req.file.mimetype 
+                    }
+                }, { new: true}).then(respo => {
+                    
+                    return res.status(200).json({
+                        success: true
+                    })
+                })
+            }
+        })
+    } catch(err) {
+        return res.status(504).json({ 
+            success: false,
+            error: err.message
+        });
+    }
+}

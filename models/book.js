@@ -27,6 +27,18 @@ const bookSchema = new Schema({
         },
         
     },
+    bookCover: { 
+        data:{
+            type: Buffer,
+            default: Buffer.alloc(0)
+            
+        },
+        contentType: {
+            type: String,
+            default: "none"
+        },
+        
+    },
 },
 { timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' },  versionKey: false });
 
