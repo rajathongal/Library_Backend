@@ -3,8 +3,8 @@ const Authors = require('../models/authors');
 
 exports.authorList = async (req, res, next) => {
     try {
-        return await Author.find().sort({'created_at': -1}).then(resp => {
-            console.log(resp)
+        return await Authors.find().sort({'created_at': -1}).then(resp => {
+           
             return res.status(200).json({
                 success: true,
                 data: resp
