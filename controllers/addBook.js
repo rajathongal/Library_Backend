@@ -24,7 +24,7 @@ exports.addBook = async (req, res, next) => {
                 });
                 
                 return await book.save().then(response => {
-                    console.log(response)
+                    
                     return res.status(200).json({ 
                         success: true,
                         message: "Book added successfully",
@@ -38,6 +38,33 @@ exports.addBook = async (req, res, next) => {
                 });
             }
         })
+    } catch(err) {
+        return res.status(504).json({ 
+            success: false,
+            error: err.message
+        });
+    }
+}
+
+exports.bookView = async (req, res) => {
+    try {
+
+        const { _id } = req.body;
+
+        return await Books.findOne({_id: _id}).then(resp => {
+            if(resp === null){
+                return res.status(404).json({
+                    succss: true,
+                    message: "Book Not found"
+                })
+            } else {
+                return res.status(200).json({ 
+                    success: true,
+                    book: resp
+                });
+            }
+        })
+
     } catch(err) {
         return res.status(504).json({ 
             success: false,
